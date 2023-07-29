@@ -1,0 +1,21 @@
+const fs = require("fs");
+consttour = require("../tourController/torCon");
+const express = require("express");
+const { tourss } = require("../tourController/torCon");
+const autc = require("./../tourController/authcontroller");
+const router = express.Router();
+router
+  .route("/")
+  .get(consttour.protect, consttour.getAllTours)
+  .post(consttour.postTours);
+//   .patch(consttour.updateTour)
+//   .delete(consttour.deleteTour);
+router.route("/topfive").get(consttour.aliasTopTours, consttour.getAllTours);
+router.route("/tourstat").get(consttour.getTourStats);
+router
+  .route("/:id")
+  .get(consttour.gettour)
+  .post(consttour.postTours)
+  .patch(consttour.updateTour)
+  .delete(consttour.deleteTour);
+module.exports = router;
